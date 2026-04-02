@@ -244,31 +244,36 @@ export default function PlayScreen() {
           <ProgressBar progress={roundProgress} style={styles.roundProgress} />
 
           {/* Zona de audio */}
-          <View style={styles.audioSection}>
-            {(phase === 'waiting_play' || phase === 'playing') && (
+          <View style={[styles.audioSection, phase === 'waiting_play' && styles.audioSectionCentered]}>
+            {phase === 'waiting_play' && (
               <>
                 <TouchableOpacity
-                  style={[styles.playButton, phase === 'playing' && styles.playButtonActive]}
+                  style={styles.playButton}
                   onPress={handlePlay}
-                  disabled={phase === 'playing'}
                   accessibilityLabel="Reproducir fragmento"
                 >
                   <View style={styles.playIconContainer}>
-                    <Text style={phase === 'playing' ? styles.pauseIcon : styles.playIcon}>
-                      {phase === 'playing' ? '▐▐' : '▶'}
+                    <Text style={styles.playIcon}>
+                      ▶
                     </Text>
                   </View>
                 </TouchableOpacity>
-                {phase === 'playing' && (
-                  <ProgressBar
-                    progress={audio.progress}
-                    color={colors.green}
-                    height={6}
-                    style={styles.audioProgress}
-                  />
-                )}
                 <Text style={styles.playHint}>
-                  {phase === 'waiting_play' ? 'Pulsa para escuchar 10 segundos' : 'Escuchando...'}
+                  Pulsa para escuchar 10 segundos
+                </Text>
+              </>
+            )}
+
+            {phase === 'playing' && (
+              <>
+                <ProgressBar
+                  progress={audio.progress}
+                  color={colors.green}
+                  height={6}
+                  style={styles.audioProgress}
+                />
+                <Text style={styles.playHint}>
+                  Escuchando...
                 </Text>
               </>
             )}
@@ -412,9 +417,13 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     paddingVertical: spacing.lg,
   },
+  audioSectionCentered: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   playButton: {
-    width: 96,
-    height: 96,
+    width: 120,
+    height: 120,
     borderRadius: radius.full,
     backgroundColor: colors.green,
     alignItems: 'center',
@@ -425,28 +434,17 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 10,
   },
-  playButtonActive: {
-    backgroundColor: colors.greenDark,
-    opacity: 0.8,
-  },
   playIconContainer: {
-    width: 96,
-    height: 96,
+    width: 120,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
   },
   playIcon: {
-    fontSize: 34,
+    fontSize: 40,
     color: colors.bg,
     fontWeight: '900',
     includeFontPadding: false,
-  },
-  pauseIcon: {
-    fontSize: 24,
-    color: colors.bg,
-    fontWeight: '900',
-    includeFontPadding: false,
-    letterSpacing: 2,
   },
   audioProgress: { width: '100%' },
   playHint: { ...typography.bodySmall, color: colors.textMuted },
