@@ -55,13 +55,13 @@ export default function ResultsScreen() {
   };
 
   const handlePlayAgain = () => {
-    resetSession();
     router.push({
       pathname: '/game/setup',
       params: {
         mode: session.config.mode,
         genreId: session.config.genreId,
         genreLabel: session.config.genreLabel,
+        genreSearchTerm: session.config.genreSearchTerm,
       },
     });
   };
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   heroScore: {
     ...typography.h1,
     fontSize: 64,
+    lineHeight: 80,
     color: colors.green,
     fontWeight: '900',
   },

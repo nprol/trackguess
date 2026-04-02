@@ -20,7 +20,7 @@ export default function RootLayout() {
         <Stack.Screen name="genres" options={{ title: 'Elige un género' }} />
         <Stack.Screen name="game/setup" options={{ title: 'Configurar partida' }} />
         <Stack.Screen name="game/play" options={{ headerShown: false }} />
-        <Stack.Screen name="game/results" options={{ headerShown: false }} />
+        <Stack.Screen name="game/results" options={{ headerShown: false, title: 'Resultados' }} />
       </Stack>
     </>
   );

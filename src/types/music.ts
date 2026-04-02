@@ -23,6 +23,7 @@ export interface GameConfig {
   mode: GameMode;
   genreId: string;
   genreLabel: string;
+  genreSearchTerm: string;
   rounds: number;
   difficulty: Difficulty;
 }

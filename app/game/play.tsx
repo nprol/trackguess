@@ -91,6 +91,7 @@ export default function PlayScreen() {
             mode: isDaily ? 'daily' : 'genre',
             genreId: params.genreId,
             genreLabel: params.genreLabel,
+            genreSearchTerm: params.genreSearchTerm,
             rounds: totalRounds,
             difficulty,
           },
@@ -252,7 +253,11 @@ export default function PlayScreen() {
                   disabled={phase === 'playing'}
                   accessibilityLabel="Reproducir fragmento"
                 >
-                  <Text style={styles.playIcon}>{phase === 'playing' ? '▐▐' : '▶'}</Text>
+                  <View style={styles.playIconContainer}>
+                    <Text style={phase === 'playing' ? styles.pauseIcon : styles.playIcon}>
+                      {phase === 'playing' ? '▐▐' : '▶'}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
                 {phase === 'playing' && (
                   <ProgressBar
@@ -358,6 +363,18 @@ export default function PlayScreen() {
             </View>
           )}
 
+          {/* Botón pasar */}
+          {phase === 'playing' && !answerRevealed && (
+            <Button
+              label="No sé, pasar →"
+              onPress={() => handleAnswer('', true)}
+              variant="secondary"
+              size="lg"
+              fullWidth
+              style={styles.skipButton}
+            />
+          )}
+
           {/* Botón siguiente */}
           {phase === 'answered' && (
             <Button
@@ -412,13 +429,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.greenDark,
     opacity: 0.8,
   },
+  playIconContainer: {
+    width: 96,
+    height: 96,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   playIcon: {
-    fontSize: 28,
-    lineHeight: 34,
+    fontSize: 34,
     color: colors.bg,
     fontWeight: '900',
-    textAlign: 'center',
     includeFontPadding: false,
+  },
+  pauseIcon: {
+    fontSize: 24,
+    color: colors.bg,
+    fontWeight: '900',
+    includeFontPadding: false,
+    letterSpacing: 2,
   },
   audioProgress: { width: '100%' },
   playHint: { ...typography.bodySmall, color: colors.textMuted },
@@ -450,6 +478,9 @@ const styles = StyleSheet.create({
   },
   textInputCorrect: { borderColor: colors.green, backgroundColor: '#1a3a22' },
   textInputWrong: { borderColor: colors.error, backgroundColor: '#3a1a1e' },
+  skipButton: {
+    marginTop: spacing.xs,
+  },
   nextButton: {
     marginTop: spacing.sm,
     marginBottom: spacing.xl,

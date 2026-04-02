@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.yourname.trackguess",
+      "bundleIdentifier": "com.nprol.trackguess",
       "infoPlist": {
         "UIBackgroundModes": [
           "audio"
@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#121212"
       },
-      "package": "com.yourname.trackguess"
+      "package": "com.nprol.trackguess"
     },
     "platforms": ["ios", "android"],
     "plugins": [
